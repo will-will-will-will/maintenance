@@ -14,7 +14,7 @@ html, body {
     margin: 0 !important;
     padding: 0 !important;
     height: 100%;
-    overflow: hidden
+    overflow: hidden;
     background: white;
 }
 
@@ -156,7 +156,8 @@ var ctx = c.getContext("2d");
 function resizeCanvas() {
     c.width = window.innerWidth;
     c.height = window.innerHeight;
-    ctx.font = `${Math.max(16, Math.floor(c.width / 40))}px serif`;
+    ctx.font = "20px serif";
+    //ctx.font = `${Math.max(16, Math.floor(c.width / 40))}px serif`;
 }
 resizeCanvas();
 window.addEventListener("resize", resizeCanvas);
@@ -439,7 +440,7 @@ function drawBackground() {
 
 
 function drawPoem() {
-    var leftMargin = Math.floor(0.66 * c.width);
+    var leftMargin = Math.floor(0.56 * c.width);
     var topMargin = Math.floor(0.063 * c.height);
     var poem;
     
