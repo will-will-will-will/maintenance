@@ -156,7 +156,7 @@ c.width = window.innerWidth;
 c.height = window.innerHeight;
 
 var ctx = c.getContext("2d");
-ctx.font = "20px serif";
+ctx.font = `${Math.max(16, Math.floor(c.width / 40))}px serif`;
 
 // Mouse tracking
 var mousePos = { x:-1000, y:0 };
@@ -185,9 +185,28 @@ var godTimer = 0;
 // God screen?
 var GOD = false;
 
+// check images are loaded then run main loop every 50ms
+let images = document.images;
+let total = images.length;
+let loaded = 0;
 
-// Run main loop every 50 milliseconds
-setInterval(update, 50);
+for (let i = 0; i < total; i++) {
+    if (images[i].complete) {
+        loaded++;
+    } else {
+        images[i].addEventListener('load', () => {
+            loaded++;
+            if (loaded === total) start();
+        });
+    }
+}
+
+if (loaded === total) start();
+
+function start() {
+    setInterval(update, 50);
+}
+
 
 
 
@@ -235,6 +254,39 @@ c.addEventListener("mouseup", function(event) {
         drawWateringCan();
     }
 });
+
+// Touch Events for mobile
+c.addEventListener("touchstart", function(event) {
+    if (!GOD) {
+        MOUSEDOWN = true;
+        let touch = event.touches[0];
+        mousePos = { x: touch.clientX, y: touch.clientY };
+        drawSprinkle();
+    }
+});
+
+c.addEventListener("touchmove", function(event) {
+    if (!GOD) {
+        let touch = event.touches[0];
+        mousePos = { x: touch.clientX, y: touch.clientY };
+        ctx.clearRect(0, 0, c.width, c.height);
+        drawBackground();
+        drawPoem();
+        drawWateringCan();
+        if (MOUSEDOWN) drawSprinkle();
+    }
+});
+
+c.addEventListener("touchend", function(event) {
+    if (!GOD) {
+        MOUSEDOWN = false;
+        ctx.clearRect(0, 0, c.width, c.height);
+        drawBackground();
+        drawPoem();
+        drawWateringCan();
+    }
+});
+
 
 
 function update() {
