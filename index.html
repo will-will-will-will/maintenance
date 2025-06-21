@@ -150,10 +150,17 @@ for (let i = flower_order.length -1; i > 0; i--) {
 }
 
 
-// Get canvas and set size to full window
+// Dynamically set canvas size and responsive font
 var c = document.getElementById("myCanvas");
-c.width = window.innerWidth;
-c.height = window.innerHeight;
+var ctx = c.getContext("2d");
+function resizeCanvas() {
+    c.width = window.innerWidth;
+    c.height = window.innerHeight;
+    ctx.font = `${Math.max(16, Math.floor(c.width / 40))}px serif`;
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
 
 var ctx = c.getContext("2d");
 ctx.font = `${Math.max(16, Math.floor(c.width / 40))}px serif`;
