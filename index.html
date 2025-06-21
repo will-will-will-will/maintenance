@@ -156,15 +156,15 @@ var ctx = c.getContext("2d");
 function resizeCanvas() {
     c.width = window.innerWidth;
     c.height = window.innerHeight;
-    ctx.font = "10px serif";
-    //ctx.font = `${Math.max(16, Math.floor(c.width / 40))}px serif`;
+    //ctx.font = "20px serif";
+    ctx.font = `${Math.max(16, Math.floor(c.width / 50))}px serif`;
 }
 resizeCanvas();
 window.addEventListener("resize", resizeCanvas);
 
 
 var ctx = c.getContext("2d");
-ctx.font = `${Math.max(16, Math.floor(c.width / 40))}px serif`;
+ctx.font = `${Math.max(16, Math.floor(c.width / 50))}px serif`;
 
 // Mouse tracking
 var mousePos = { x:-1000, y:0 };
